@@ -1,6 +1,6 @@
-package com.epam.webdriver.test;
+package com.epam.pastebin.test;
 
-import com.epam.webdriver.page.PastebinHomePage;
+import com.epam.pastebin.page.PastebinHomePage;
 import org.testng.annotations.Test;
 
 public class PastebinFirstTest extends AbstractPastebinTest {

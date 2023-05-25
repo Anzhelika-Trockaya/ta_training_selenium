@@ -1,7 +1,7 @@
-package com.epam.webdriver.test;
+package com.epam.pastebin.test;
 
-import com.epam.webdriver.page.PastebinHomePage;
-import com.epam.webdriver.page.PastebinPastePage;
+import com.epam.pastebin.page.PastebinHomePage;
+import com.epam.pastebin.page.PastebinPastePage;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 

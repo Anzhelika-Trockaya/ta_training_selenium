@@ -1,6 +1,5 @@
-package com.epam.webdriver.page;
+package com.epam.pastebin.page;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +11,6 @@ import java.time.Duration;
 
 public class PastebinHomePage extends AbstractPastebinPage {
     private final String HOME_PAGE_URL = "https://pastebin.com/";
-    private final String CODE_FOR_JAVA_SCRIPT_CLICK_FIRST_ARGUMENT = "arguments[0].click();";
 
     @FindBy(id = "postform-text")
     private WebElement codeInput;
@@ -72,12 +70,6 @@ public class PastebinHomePage extends AbstractPastebinPage {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(optionSyntaxHighlightingBash));
         optionSyntaxHighlightingBash.click();
-        return this;
-    }
-
-    private PastebinHomePage clickUsingJavaScript(WebElement element) {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript(CODE_FOR_JAVA_SCRIPT_CLICK_FIRST_ARGUMENT, element);
         return this;
     }
 }
