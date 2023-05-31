@@ -1,10 +1,10 @@
 package com.epam.pricingcalc.test;
 
+import com.epam.pricingcalc.driver.DriverSingleton;
 import com.epam.pricingcalc.page.EmailGeneratorPage;
 import com.epam.pricingcalc.page.GoogleCloudStartPage;
 import com.epam.pricingcalc.page.PricingCalculatorEmailEstimatePage;
 import com.epam.pricingcalc.page.PricingCalculatorEstimatePage;
-import com.epam.pricingcalc.util.DriverUtil;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -38,21 +38,20 @@ public class GoogleCloudPricingCalculatorTest extends AbstractGoogleCloudTest {
     }
 
     @Test
-    public void emailEstimateTest() throws InterruptedException {
+    public void emailEstimateTest() {
         String expectedTotalEstimatedMostlyCost = "USD 4,024.56";
-        DriverUtil driverUtil = DriverUtil.getInstance();
         PricingCalculatorEmailEstimatePage pricingCalculatorEmailEstimatePage = openPageAndFillDataForEstimating()
                 .clickEmailEstimateButton();
-        driverUtil.createAnotherTab(driver);
+        DriverSingleton.createAnotherTab();
         EmailGeneratorPage emailGeneratorPage = new EmailGeneratorPage(driver)
                 .openPage()
                 .generateEmail();
         String generatedEmail = emailGeneratorPage.receiveGeneratedEmail();
-        driverUtil.switchToOtherTabIfExists(driver);
+        DriverSingleton.switchToOtherTabIfExists();
         pricingCalculatorEmailEstimatePage
                 .pasteEmail(generatedEmail)
                 .clickSendEmail();
-        driverUtil.switchToOtherTabIfExists(driver);
+        DriverSingleton.switchToOtherTabIfExists();
         String actualTotalEstimatedMostlyCost = emailGeneratorPage
                 .clickCheckInboxButton()
                 .waitForMail()
