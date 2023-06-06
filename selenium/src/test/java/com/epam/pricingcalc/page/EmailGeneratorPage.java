@@ -53,7 +53,7 @@ public class EmailGeneratorPage extends AbstractPage {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(checkInboxButton));
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(checkInboxButton));
+                .until(ExpectedConditions.elementToBeClickable(checkInboxButton));//todo
         checkInboxButton.click();
         return this;
     }

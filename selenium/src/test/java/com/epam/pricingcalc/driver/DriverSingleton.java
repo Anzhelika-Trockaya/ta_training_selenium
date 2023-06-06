@@ -20,9 +20,11 @@ public class DriverSingleton {
             switch (System.getProperty("browser")) {
                 case "firefox": {
                     driver = WebDriverManager.firefoxdriver().create();
+                    driver.manage().window().maximize();
                 }
                 default: {
                     driver = WebDriverManager.chromedriver().create();
+                    driver.manage().window().maximize();
                 }
             }
         }
