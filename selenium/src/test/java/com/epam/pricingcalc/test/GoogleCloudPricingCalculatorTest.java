@@ -47,13 +47,13 @@ public class GoogleCloudPricingCalculatorTest extends AbstractGoogleCloudTest {
                 .openPage()
                 .generateEmail();
         String generatedEmail = emailGeneratorPage.receiveGeneratedEmail();
-        emailGeneratorPage.clickCheckInboxButton();
         DriverSingleton.switchToOtherTabIfExists();
         pricingCalculatorEmailEstimatePage
                 .pasteEmail(generatedEmail)
                 .clickSendEmail();
         DriverSingleton.switchToOtherTabIfExists();
         String actualTotalEstimatedMostlyCost = emailGeneratorPage
+                .clickCheckInboxButton()
                 .waitForMail()
                 .receiveTotalEstimatedMostlyCost();
         Assert.assertEquals(expectedTotalEstimatedMostlyCost, actualTotalEstimatedMostlyCost);
