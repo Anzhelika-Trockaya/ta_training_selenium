@@ -15,7 +15,7 @@ public class EmailGeneratorPage extends AbstractPage {
     private WebElement generateLink;
     @FindBy(id = "geny")
     private WebElement generatedEmailText;
-    @FindBy(xpath = "//span[contains(text(),'Check Inbox')]")
+    @FindBy(xpath = "//button[contains(span,'Check Inbox')]")
     private WebElement checkInboxButton;
     @FindBy(id = "refresh")
     private WebElement refreshButton;
@@ -51,7 +51,7 @@ public class EmailGeneratorPage extends AbstractPage {
 
     public EmailGeneratorPage clickCheckInboxButton() {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(checkInboxButton));
+                .until(ExpectedConditions.elementToBeClickable(checkInboxButton));
         checkInboxButton.click();
         return this;
     }

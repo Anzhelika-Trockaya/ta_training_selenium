@@ -8,7 +8,6 @@
     <artifactId>selenium</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
-        <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -16,8 +15,8 @@
                 <version>2.14.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng-all.xml</suiteXmlFile>
-                        <suiteXmlFile>testng-smoke.xml</suiteXmlFile>
+                        <suiteXmlFile>src\test\resources\testng-all.xml</suiteXmlFile>
+                        <suiteXmlFile>src\test\resources\testng-smoke.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -48,6 +47,12 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.8.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
