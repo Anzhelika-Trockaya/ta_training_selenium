@@ -156,7 +156,7 @@ public class PricingCalculatorPage extends AbstractPage {
         logger.debug("Trying to choose GPU type '"+ gpuType + "'.");
         click(gpuTypeSelect);
         WebElement gpuTypeOption = driver.findElement(
-                By.xpath(""+gpuType+"')]"));
+                By.xpath("//*[@id='select_container_983']//div[contains(text(),'"+gpuType+"')]"));
         click(gpuTypeOption);
         return this;
     }
@@ -165,7 +165,7 @@ public class PricingCalculatorPage extends AbstractPage {
         logger.debug("Trying to choose number of GPU '"+ numberOfGpu + "'.");
         click(numberOfGpuSelect);
         WebElement numberOfGpuOption = driver.findElement(
-                By.xpath(""+numberOfGpu+"')]"));
+                By.xpath("//*[@id='select_container_985']//div[contains(text(),'"+numberOfGpu+"')]"));
         click(numberOfGpuOption);
         return this;
     }
@@ -174,7 +174,7 @@ public class PricingCalculatorPage extends AbstractPage {
         logger.debug("Trying to choose local SSD '"+ localSsd + "'.");
         click(localSsdSelect);
         WebElement localSsdOption = driver.findElement(
-                By.xpath(""+localSsd+"')]"));
+                By.xpath("//*[@id='select_container_948']//div[contains(text(),'"+localSsd+"')]"));
         click(localSsdOption);
         return this;
     }
@@ -183,7 +183,7 @@ public class PricingCalculatorPage extends AbstractPage {
         logger.debug("Trying to choose datacenter location '"+ dataCenterLocation + "'.");
         click(datacenterLocationSelect);
         WebElement dataCenterLocationOption = driver.findElement(
-                By.xpath(""+dataCenterLocation+"')]"));
+                By.xpath("//*[@id='select_container_130']//div[contains(text(),'"+dataCenterLocation+"')]"));
         click(dataCenterLocationOption);
         return this;
     }
@@ -192,7 +192,7 @@ public class PricingCalculatorPage extends AbstractPage {
         logger.debug("Trying to choose committed usage '"+ committedUsage + "'.");
         click(committedUsageSelect);
         WebElement committedUsageOption = driver.findElement(
-                By.xpath(""+committedUsage+"')]"));
+                By.xpath("//*[@id='select_container_137']//div[contains(text(),'"+committedUsage+"')]"));
         click(committedUsageOption);
         return this;
     }
