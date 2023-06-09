@@ -65,7 +65,7 @@ public class PricingCalculatorPage extends AbstractPage {
     private WebElement addToEstimateButton;
 
     @FindBy(id = "input_97")
-    private WebElement whatAreInstancesForInput;
+    private WebElement whatAreInstancesForInput;//todo delete extra
     @FindBy(id = "select_value_label_222")
     private WebElement threadsPerCoreSelect;
     @FindBy(id = "select_value_label_90")
@@ -100,265 +100,209 @@ public class PricingCalculatorPage extends AbstractPage {
 
     public PricingCalculatorPage chooseSectionComputeEngine() {
         logger.debug("Trying to choose section 'Compute engine'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(sectionComputeEngine));
-        sectionComputeEngine.click();
+        click(sectionComputeEngine);
         return this;
     }
 
     public PricingCalculatorPage fillOutNumberOfInstances(String number) {
         logger.debug("Trying to choose number of instances '"+ number + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(numberOfInstancesInput));
-        numberOfInstancesInput.sendKeys(number);
+        sendKeysToInput(numberOfInstancesInput,number);
         return this;
     }
 
     public PricingCalculatorPage selectOperatingSystem(String operatingSystem) {
         logger.debug("Trying to choose operating system '"+ operatingSystem + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(operatingSystemSelect));
-        operatingSystemSelect.click();
+        click(operatingSystemSelect);
         WebElement operatingSystemOption = driver.findElement(
                 By.xpath("//*[@id='select_container_110']//div[contains(text(),'"+operatingSystem+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(operatingSystemOption));
-        operatingSystemOption.click();
+        click(operatingSystemOption);
         return this;
     }
 
     public PricingCalculatorPage selectProvisioningModel(String provisioningModel) {
         logger.debug("Trying to choose provisioning model '"+ provisioningModel + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(provisioningModelSelect));
-        provisioningModelSelect.click();
+        click(provisioningModelSelect);
         WebElement provisioningModelOption = driver.findElement(
                 By.xpath("//*[@id='select_container_114']//div[contains(text(),'"+provisioningModel+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(provisioningModelOption));
-        provisioningModelOption.click();
+        click(provisioningModelOption);
         return this;
     }
 
     public PricingCalculatorPage selectMachineSeries(String machineSeries) {
         logger.debug("Trying to choose machine series '"+ machineSeries + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(seriesSelect));
-        seriesSelect.click();
+        click(seriesSelect);
         WebElement machineSeriesOption = driver.findElement(
                 By.xpath("//*[@id='select_container_122']//div[contains(text(),'"+machineSeries+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(machineSeriesOption));
-        machineSeriesOption.click();
+        click(machineSeriesOption);
         return this;
     }
 
     public PricingCalculatorPage selectMachineType(String machineType) {
         logger.debug("Trying to choose machine type '"+ machineType + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(machineTypeSelect));
-        machineTypeSelect.click();
+        click(machineTypeSelect);
         WebElement machineTypeOption = driver.findElement(
                 By.xpath("//*[@id='select_container_124']//div[contains(text(),'"+machineType+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(machineTypeOption));
-        machineTypeOption.click();
+        click(machineTypeOption);
         return this;
     }
 
     public PricingCalculatorPage clickAddGpusCheckbox() {
         logger.debug("Trying to click add GPU.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(addGpusCheckbox));
-        addGpusCheckbox.click();
+        click(addGpusCheckbox);
         return this;
     }
 
     public PricingCalculatorPage selectGpuType(String gpuType) {
         logger.debug("Trying to choose GPU type '"+ gpuType + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(gpuTypeSelect));
-        gpuTypeSelect.click();
+        click(gpuTypeSelect);
         WebElement gpuTypeOption = driver.findElement(
                 By.xpath(""+gpuType+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(gpuTypeOption));
-        gpuTypeOption.click();
+        click(gpuTypeOption);
         return this;
     }
 
     public PricingCalculatorPage selectNumberOfGpu(String numberOfGpu) {
         logger.debug("Trying to choose number of GPU '"+ numberOfGpu + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(numberOfGpuSelect));
-        numberOfGpuSelect.click();
+        click(numberOfGpuSelect);
         WebElement numberOfGpuOption = driver.findElement(
                 By.xpath(""+numberOfGpu+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(numberOfGpuOption));
-        numberOfGpuOption.click();
+        click(numberOfGpuOption);
         return this;
     }
 
     public PricingCalculatorPage selectLocalSsd(String localSsd) {
         logger.debug("Trying to choose local SSD '"+ localSsd + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(localSsdSelect));
-        localSsdSelect.click();
+        click(localSsdSelect);
         WebElement localSsdOption = driver.findElement(
                 By.xpath(""+localSsd+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(localSsdOption));
-        localSsdOption.click();
+        click(localSsdOption);
         return this;
     }
 
     public PricingCalculatorPage selectDataCenterLocation(String dataCenterLocation) {
         logger.debug("Trying to choose datacenter location '"+ dataCenterLocation + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(datacenterLocationSelect));
-        datacenterLocationSelect.click();
+        click(datacenterLocationSelect);
         WebElement dataCenterLocationOption = driver.findElement(
                 By.xpath(""+dataCenterLocation+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(dataCenterLocationOption));
-        dataCenterLocationOption.click();
+        click(dataCenterLocationOption);
         return this;
     }
 
     public PricingCalculatorPage selectCommittedUsage(String committedUsage) {
         logger.debug("Trying to choose committed usage '"+ committedUsage + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(committedUsageSelect));
-        committedUsageSelect.click();
+        click(committedUsageSelect);
         WebElement committedUsageOption = driver.findElement(
                 By.xpath(""+committedUsage+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(committedUsageOption));
-        committedUsageOption.click();
+        click(committedUsageOption);
         return this;
     }
 
     public PricingCalculatorEstimatePage clickAddToEstimate() {
         logger.debug("Trying to click 'Add to estimate'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(addToEstimateButton));
-        addToEstimateButton.click();
+        click(addToEstimateButton);
         return new PricingCalculatorEstimatePage(driver);
     }
 
     public PricingCalculatorPage fillOutWhatAreInstancesFor(String whatAreInstancesFor) {
         logger.debug("Trying to fill out 'What are the instances for' with text '"+ whatAreInstancesFor + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(whatAreInstancesForInput));
-        whatAreInstancesForInput.sendKeys(whatAreInstancesFor);
+        sendKeysToInput(whatAreInstancesForInput,whatAreInstancesFor);
         return this;
     }
 
     public PricingCalculatorPage selectMachineFamily(String machineFamily) {
         logger.debug("Trying to choose machine family '"+ machineFamily + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(machineFamilySelect));
-        machineFamilySelect.click();
+        click(machineFamilySelect);
         WebElement machineFamilyOption = driver.findElement(
                 By.xpath("//*[@id='select_container_120']//div[contains(text(),'"+machineFamily+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(machineFamilyOption));
-        machineFamilyOption.click();
+        click(machineFamilyOption);
         return this;
     }
 
     public PricingCalculatorPage selectThreadsPerCore(String threadsPerCore) {
         logger.debug("Trying to choose threads per core '"+ threadsPerCore + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(threadsPerCoreSelect));
-        threadsPerCoreSelect.click();
+        click(threadsPerCoreSelect);
         WebElement threadsPerCoreOption = driver.findElement(
                 By.xpath("//*[@id='select_container_224']//div[contains(text(),'"+threadsPerCore+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(threadsPerCoreOption));
-        threadsPerCoreOption.click();
+        click(threadsPerCoreOption);
         return this;
     }
 
     public PricingCalculatorPage selectBootDiskType(String bootDiskType) {
         logger.debug("Trying to choose boot disk type '"+ bootDiskType + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(bootDiskTypeSelect));
-        bootDiskTypeSelect.click();
+        click(bootDiskTypeSelect);
         WebElement bootDiskTypeOption = driver.findElement(
                 By.xpath("//*[@id='select_container_126']//div[contains(text(),'"+bootDiskType+"')]"));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(bootDiskTypeOption));
-        bootDiskTypeOption.click();
+        click(bootDiskTypeOption);
         return this;
     }
 
     public PricingCalculatorPage fillOutBootDiskSize(String bootDiskSize) {
         logger.debug("Trying to fill out boot disk size with value='"+ bootDiskSize + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(bootDiskSizeInput));
-       bootDiskSizeInput.sendKeys(bootDiskSize);
+        sendKeysToInput(bootDiskSizeInput,bootDiskSize);
         return this;
     }
 
     public PricingCalculatorPage clickEnableConfidentialVmService() {
         logger.debug("Trying to click checkbox 'Enable Confidential VM service'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(enableConfidentialVmServiceCheckbox));
-        enableConfidentialVmServiceCheckbox.click();
+        click(enableConfidentialVmServiceCheckbox);
         return this;
     }
 
-    public boolean isChosenEnableConfidentialVmService() {
+    public boolean isCheckedEnableConfidentialVmService() {
         logger.debug("Trying to find out if is selected checkbox 'Enable Confidential VM service' checkbox.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(enableConfidentialVmServiceCheckbox));
-        boolean isSelected = enableConfidentialVmServiceCheckbox.isSelected();
-        logger.info("Checkbox 'Add Sustained Use Discounts' is selected = "+isSelected);
-        return isSelected;
+        boolean isChecked = isAttributeAriaCheckedEqualsTrue(enableConfidentialVmServiceCheckbox);
+        logger.info("Checkbox 'Enable Confidential VM service' is checked = "+isChecked);
+        return isChecked;
     }
 
     public PricingCalculatorPage clickAddSustainedUseDiscounts() {
         logger.debug("Trying to click checkbox 'Add Sustained Use Discounts.'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(addSustainedUseDiscountsCheckbox));
-        addSustainedUseDiscountsCheckbox.click();
+        click(addSustainedUseDiscountsCheckbox);
         return this;
     }
 
-    public boolean isChosenAddSustainedUseDiscounts() {
-        logger.debug("Trying to find out if is selected checkbox 'Add Sustained Use Discounts'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(addSustainedUseDiscountsCheckbox));
-        boolean isSelected = addSustainedUseDiscountsCheckbox.isSelected();
-        logger.info("Checkbox 'Add Sustained Use Discounts' is selected = "+isSelected);
-        return isSelected;
+    public boolean isCheckedAddSustainedUseDiscounts() {
+        logger.debug("Trying to find out if is checked checkbox 'Add Sustained Use Discounts'.");
+        boolean isChecked = isAttributeAriaCheckedEqualsTrue(addSustainedUseDiscountsCheckbox);
+        logger.info("Checkbox 'Add Sustained Use Discounts' is checked = "+isChecked);
+        return isChecked;
     }
 
-    public boolean isChosenAddGpus() {
-        logger.debug("Trying to find out if is selected checkbox 'Add GPUs'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(addGpusCheckbox));
-        boolean isSelected = addGpusCheckbox.isSelected();
-        logger.info("Checkbox 'Add GPUs' is selected = "+isSelected);
-        return isSelected;
+    public boolean isCheckedAddGpus() {
+        logger.debug("Trying to find out if is checked checkbox 'Add GPUs'.");
+        boolean isChecked = isAttributeAriaCheckedEqualsTrue(addGpusCheckbox);
+        logger.info("Checkbox 'Add GPUs' is checked = "+isChecked);
+        return isChecked;
     }
 
     public PricingCalculatorPage fillOutInstancesUsingStaticPublicIp(String instancesUsingStaticPublicIp) {
         logger.debug("Trying to fill out 'Instances using static public IP' with '"+ instancesUsingStaticPublicIp + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(instancesUsingStaticPublicIpInput));
-        instancesUsingStaticPublicIpInput.sendKeys(instancesUsingStaticPublicIp);
+        sendKeysToInput(instancesUsingStaticPublicIpInput,instancesUsingStaticPublicIp);
         return this;
     }
 
     public PricingCalculatorPage fillOutInstancesUsingEphemeralPublicIp(String instancesUsingEphemeralPublicIp) {
         logger.debug("Trying to fill out 'Instances using ephemeral public IP' with '"+ instancesUsingEphemeralPublicIp + "'.");
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(instancesUsingEphemeralPublicIpInput));
-        instancesUsingEphemeralPublicIpInput.sendKeys(instancesUsingEphemeralPublicIp);
+        sendKeysToInput(instancesUsingEphemeralPublicIpInput, instancesUsingEphemeralPublicIp);
         return this;
+    }
+
+    private void click(WebElement element){
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(element));
+        element.click();
+    }
+
+    private boolean isAttributeAriaCheckedEqualsTrue(WebElement checkbox){
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(checkbox));
+        return Boolean.parseBoolean(checkbox.getAttribute("aria-checked"));
+    }
+
+    private void sendKeysToInput(WebElement input, String key){
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(input));
+        input.sendKeys(key);
     }
 
     //todo end new code

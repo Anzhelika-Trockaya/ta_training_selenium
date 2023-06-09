@@ -27,7 +27,7 @@ public abstract class AbstractGoogleCloudPricingCalculatorTest {
     }
 
     protected PricingCalculatorEstimatePage openPageAndFillDataForEstimating(ComputeEngine computeEngine) {//fixme start here!!!
-        String searchText = "Google Cloud Platform Pricing Calculator";//todo refactor отдельно открытие и через гугл или просто поместить в файл проперти!!!
+        String searchText = "Google Cloud Platform Pricing Calculator";//todo refactor отдельно открытие
         PricingCalculatorPage pricingCalculatorPage = new GoogleCloudStartPage(driver)
                 .openPage()
                 .clickSearchButton()
@@ -67,13 +67,13 @@ public abstract class AbstractGoogleCloudPricingCalculatorTest {
         if (computeEngine.getBootDiskSize() != null) {
             pricingCalculatorPage.fillOutBootDiskSize(computeEngine.getBootDiskSize());
         }
-        if (computeEngine.isEnableConfidentialVmService() && !pricingCalculatorPage.isChosenEnableConfidentialVmService()) {
+        if (computeEngine.isEnableConfidentialVmService() && !pricingCalculatorPage.isCheckedEnableConfidentialVmService()) {
             pricingCalculatorPage.clickEnableConfidentialVmService();
         }
-        if (computeEngine.isAddSustainedUseDiscounts() && !pricingCalculatorPage.isChosenAddSustainedUseDiscounts()) {
+        if (computeEngine.isAddSustainedUseDiscounts() && !pricingCalculatorPage.isCheckedAddSustainedUseDiscounts()) {
             pricingCalculatorPage.clickAddSustainedUseDiscounts();
         }
-        if (computeEngine.isAddGpus() && !pricingCalculatorPage.isChosenAddGpus()) {
+        if (computeEngine.isAddGpus() && !pricingCalculatorPage.isCheckedAddGpus()) {
             pricingCalculatorPage.clickAddGpusCheckbox();
         }
         if (computeEngine.getGpuType() != null) {
