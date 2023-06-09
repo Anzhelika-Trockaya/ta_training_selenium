@@ -1,5 +1,7 @@
 package com.epam.pricingcalc.page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class PricingCalculatorEmailEstimatePage extends AbstractPage{
-
+    private static final Logger logger = LogManager.getLogger();
     @FindBy(xpath = "//iframe[@src='https://cloud.google.com/frame/products/calculator/index_d6a98ba38837346d20babc06ff2153b68c2990fa24322fe52c5f83ec3a78c6a0.frame?hl=ru']")
     private WebElement firstFrame;
     @FindBy(id = "myFrame")
@@ -25,6 +27,7 @@ public class PricingCalculatorEmailEstimatePage extends AbstractPage{
 
     @Override
     protected PricingCalculatorEmailEstimatePage openPage() {
+        logger.error("You can not open this page. It can be only a result of actions on other page.");
         throw new RuntimeException("You can not open this page. It can be only a result of actions on other page.");
     }
 
@@ -33,6 +36,7 @@ public class PricingCalculatorEmailEstimatePage extends AbstractPage{
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(emailInput));
         emailInput.sendKeys(email);
+        logger.debug("Email address was pasted.");
         driver.switchTo().defaultContent();
         return this;
     }
@@ -42,6 +46,7 @@ public class PricingCalculatorEmailEstimatePage extends AbstractPage{
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(sendEmailButton));
         sendEmailButton.click();
+        logger.debug("Button 'Send email' was clicked.");
         driver.switchTo().defaultContent();
         return this;
     }

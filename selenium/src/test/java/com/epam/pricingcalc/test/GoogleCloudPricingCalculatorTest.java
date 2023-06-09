@@ -5,13 +5,16 @@ import com.epam.pricingcalc.page.EmailGeneratorPage;
 import com.epam.pricingcalc.page.GoogleCloudStartPage;
 import com.epam.pricingcalc.page.PricingCalculatorEmailEstimatePage;
 import com.epam.pricingcalc.page.PricingCalculatorEstimatePage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class GoogleCloudPricingCalculatorTest extends AbstractGoogleCloudTest {
-   /*//todo
-         @Test
+public class GoogleCloudPricingCalculatorTest extends AbstractGoogleCloudPricingCalculatorTest {
+    /* //todo delete if success
+    private static final Logger logger = LogManager.getLogger();
+    @Test
     public void pricingCalculatingTest() {
         String expectedProvisioningModel = "Regular";
         String expectedInstanceType = "n1-standard-8";
@@ -36,7 +39,7 @@ public class GoogleCloudPricingCalculatorTest extends AbstractGoogleCloudTest {
         softAssert.assertEquals(actualCommitmentTerm, expectedCommitmentTerm);
         softAssert.assertEquals(actualTotalEstimatedCost, expectedTotalEstimatedCost);
         softAssert.assertAll();
-    }*/
+    }
     @Test
     public void emailEstimateTest() {
         String expectedTotalEstimatedMostlyCost = "USD 4,024.56";
@@ -58,6 +61,7 @@ public class GoogleCloudPricingCalculatorTest extends AbstractGoogleCloudTest {
                 .receiveTotalEstimatedMostlyCost();
         Assert.assertEquals(expectedTotalEstimatedMostlyCost, actualTotalEstimatedMostlyCost);
     }
+
 
 
     private PricingCalculatorEstimatePage openPageAndFillDataForEstimating() {
@@ -82,4 +86,5 @@ public class GoogleCloudPricingCalculatorTest extends AbstractGoogleCloudTest {
                 .selectCommittedUsageOneYear()
                 .clickAddToEstimate();
     }
+    */
 }

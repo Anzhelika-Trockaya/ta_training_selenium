@@ -1,5 +1,7 @@
 package com.epam.pricingcalc.page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class EmailGeneratorPage extends AbstractPage {
+    private static final Logger logger = LogManager.getLogger();
     private final String EMAIL_GENERATOR_PAGE_URL = "https://yopmail.com/en/";
     private final int MAX_MAIL_WAITING_TIME_MILLIS = 10000;
     @FindBy(xpath = "//a[@href='email-generator']")
@@ -33,6 +36,7 @@ public class EmailGeneratorPage extends AbstractPage {
     @Override
     public EmailGeneratorPage openPage() {
         driver.get(EMAIL_GENERATOR_PAGE_URL);
+        logger.debug("EmailGeneratorPage was opened.");
         return this;
     }
 
@@ -40,13 +44,16 @@ public class EmailGeneratorPage extends AbstractPage {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(generateLink));
         generateLink.click();
+        logger.debug("Generate link was clicked.");
         return this;
     }
 
     public String receiveGeneratedEmail() {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(generatedEmailText));
-        return generatedEmailText.getText();
+        String generatedEmail = generatedEmailText.getText();
+        logger.info("Generated email address: '" + generatedEmail + "'");
+        return generatedEmail;
     }
 
     public EmailGeneratorPage clickCheckInboxButton() {
@@ -55,38 +62,47 @@ public class EmailGeneratorPage extends AbstractPage {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.elementToBeClickable(checkInboxButton));//todo
         checkInboxButton.click();
+        logger.debug("Check inbox button was clicked.");
         return this;
     }
 
     public EmailGeneratorPage waitForMail() {
+        logger.debug("Waiting for email.");
         long startWaitingTime = System.currentTimeMillis();
         int currentWaitingTime;
-        while (isNumberOfMailsZero()) {
+        while (receiveNumberOfMails().equals("0")) {
             currentWaitingTime = (int) (System.currentTimeMillis() - startWaitingTime);
             if (currentWaitingTime <= MAX_MAIL_WAITING_TIME_MILLIS) {
+                logger.debug("Refreshing page.");
                 refresh();
             } else {
-                throw new RuntimeException("Mail isn't received.");
+                logger.error("Mail wasn't received.");
+                throw new RuntimeException("Mail wasn't received.");
             }
         }
         return this;
     }
 
     public String receiveTotalEstimatedMostlyCost() {
+        logger.debug("Trying to receive total estimated mostly cost.");
         try {
             driver.switchTo().frame(mailTextFrame);
             new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                     .until(ExpectedConditions.visibilityOf(totalEstimatedMostlyCostText));
-            return totalEstimatedMostlyCostText.getText().trim();
+            String totalEstimatedMostlyCost = totalEstimatedMostlyCostText.getText().trim();
+            logger.info("Total estimated mostly cost: '" + totalEstimatedMostlyCost + "'");
+            return totalEstimatedMostlyCost;
         } finally {
             driver.switchTo().defaultContent();
         }
     }
 
-    private boolean isNumberOfMailsZero() {
+    private String receiveNumberOfMails() {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(numberOfMailsText));
-        return numberOfMailsText.getText().trim().startsWith("0");
+        String numberOfMails = numberOfMailsText.getText().split(" ")[0];
+        logger.info("Number of mails = '" + numberOfMails + "'");
+        return numberOfMails;
     }
 
     private void refresh() {

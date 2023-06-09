@@ -1,5 +1,7 @@
 package com.epam.pricingcalc.page;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class PricingCalculatorEstimatePage extends AbstractPage {
-
+    private static final Logger logger = LogManager.getLogger();
     @FindBy(xpath = "//*[@id='resultBlock']/descendant::*[contains(text(),'Region:')]")
     private WebElement regionText;
     @FindBy(xpath = "//*[@id='resultBlock']/descendant::*[contains(text(),'Provisioning model:')]")
@@ -22,50 +24,74 @@ public class PricingCalculatorEstimatePage extends AbstractPage {
     private WebElement commitmentTermText;
     @FindBy(xpath = "//*[@class = 'cpc-cart-total']")
     private WebElement totalEstimatedCostText;
-    @FindBy(id="Email Estimate")
+    @FindBy(id = "Email Estimate")
     private WebElement emailEstimateButton;
 
 
     protected PricingCalculatorEstimatePage(WebDriver driver) {
         super(driver);
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(totalEstimatedCostText));
     }
 
     @Override
     protected AbstractPage openPage() {
+        logger.error("You can not open this page. It can be only a result of actions on other page.");
         throw new RuntimeException("You can not open this page. It can be only a result of actions on other page.");
     }
 
 
     public String receiveProvisioningModel() {
-        return takeOutValueFromProperty(provisioningModelText.getText());
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(provisioningModelText));
+        String provisioningModel = takeOutValueFromProperty(provisioningModelText.getText());
+        logger.info("Received provisioning model :'" + provisioningModel + "'");
+        return provisioningModel;
     }
 
     public String receiveInstanceType() {
-        return takeOutValueFromProperty(instanceTypeText.getText());
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(instanceTypeText));
+        String instanceType = takeOutValueFromProperty(instanceTypeText.getText());
+        logger.info("Received instance type :'" + instanceType + "'");
+        return instanceType;
     }
 
     public String receiveRegion() {
-        return takeOutValueFromProperty(regionText.getText());
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(regionText));
+        String region = takeOutValueFromProperty(regionText.getText());
+        logger.info("Received region : '" + region + "'");
+        return region;
     }
 
     public String receiveLocalSsd() {
-        return takeOutValueFromProperty(localSsdText.getText());
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(localSsdText));
+        String localSsd = takeOutValueFromProperty(localSsdText.getText());
+        logger.info("Received local SSD : '" + localSsd + "'");
+        return localSsd;
     }
 
     public String receiveCommitmentTerm() {
-        return takeOutValueFromProperty(commitmentTermText.getText());
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(commitmentTermText));
+        String commitmentTerm = takeOutValueFromProperty(commitmentTermText.getText());
+        logger.info("Received commitment term : '" + commitmentTerm + "'");
+        return commitmentTerm;
     }
 
     public String receiveTotalEstimatedCost() {
-        return takeOutValueFromProperty(totalEstimatedCostText.getText());
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(totalEstimatedCostText));
+        String totalEstimatedCost = takeOutValueFromProperty(totalEstimatedCostText.getText());
+        logger.info("Received total estimated cost :'" + totalEstimatedCost + "'");
+        return totalEstimatedCost;
     }
 
-    public PricingCalculatorEmailEstimatePage clickEmailEstimateButton(){
+    public PricingCalculatorEmailEstimatePage clickEmailEstimateButton() {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(emailEstimateButton));
         emailEstimateButton.click();
+        logger.debug("Button 'Email estimate' was clicked.");
         return new PricingCalculatorEmailEstimatePage(driver);
     }
 
