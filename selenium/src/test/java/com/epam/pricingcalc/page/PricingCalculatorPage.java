@@ -140,6 +140,8 @@ public class PricingCalculatorPage extends AbstractPage {
     public PricingCalculatorPage selectNumberOfGpu(String numberOfGpu) {
         logger.debug("Trying to choose number of GPU '" + numberOfGpu + "'.");
         click(numberOfGpuSelect);
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//md-backdrop"))));
         clickVisibleOptionWithText(numberOfGpu);
         return this;
     }
@@ -258,8 +260,6 @@ public class PricingCalculatorPage extends AbstractPage {
     private void clickVisibleOptionWithText(String text){
         String optionXpath = "//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
                 + text + "')]";
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath(optionXpath)));
         WebElement option = driver.findElement(By.xpath(optionXpath));
         click(option);
     }
