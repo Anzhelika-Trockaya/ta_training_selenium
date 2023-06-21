@@ -133,50 +133,35 @@ public class PricingCalculatorPage extends AbstractPage {
     public PricingCalculatorPage selectGpuType(String gpuType) {
         logger.debug("Trying to choose GPU type '" + gpuType + "'.");
         click(gpuTypeSelect);
-        WebElement gpuTypeOption = driver.findElement(
-                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
-                        + gpuType + "')]"));
-        click(gpuTypeOption);
+        clickVisibleOptionWithText(gpuType);
         return this;
     }
 
     public PricingCalculatorPage selectNumberOfGpu(String numberOfGpu) {
         logger.debug("Trying to choose number of GPU '" + numberOfGpu + "'.");
         click(numberOfGpuSelect);
-        WebElement numberOfGpuOption = driver.findElement(
-                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
-                        + numberOfGpu + "')]"));
-        click(numberOfGpuOption);
+        clickVisibleOptionWithText(numberOfGpu);
         return this;
     }
 
     public PricingCalculatorPage selectLocalSsd(String localSsd) {
         logger.debug("Trying to choose local SSD '" + localSsd + "'.");
         click(localSsdSelect);
-        WebElement localSsdOption = driver.findElement(
-                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
-                        + localSsd + "')]"));
-        click(localSsdOption);
+        clickVisibleOptionWithText(localSsd);
         return this;
     }
 
     public PricingCalculatorPage selectDataCenterLocation(String dataCenterLocation) {
         logger.debug("Trying to choose datacenter location '" + dataCenterLocation + "'.");
         click(datacenterLocationSelect);
-        WebElement dataCenterLocationOption = driver.findElement(
-                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
-                        + dataCenterLocation + "')]"));
-        click(dataCenterLocationOption);
+        clickVisibleOptionWithText(dataCenterLocation);
         return this;
     }
 
     public PricingCalculatorPage selectCommittedUsage(String committedUsage) {
         logger.debug("Trying to choose committed usage '" + committedUsage + "'.");
         click(committedUsageSelect);
-        WebElement committedUsageOption = driver.findElement(
-                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
-                        + committedUsage + "')]"));
-        click(committedUsageOption);
+        clickVisibleOptionWithText(committedUsage);
         return this;
     }
 
@@ -268,6 +253,13 @@ public class PricingCalculatorPage extends AbstractPage {
         logger.debug("Trying to fill out 'Instances using ephemeral public IP' with '" + instancesUsingEphemeralPublicIp + "'.");
         sendKeysToInput(instancesUsingEphemeralPublicIpInput, instancesUsingEphemeralPublicIp);
         return this;
+    }
+
+    private void clickVisibleOptionWithText(String text){
+        WebElement option = driver.findElement(
+                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
+                        + text + "')]"));
+        click(option);
     }
 
     private void goIntoFrames() {
