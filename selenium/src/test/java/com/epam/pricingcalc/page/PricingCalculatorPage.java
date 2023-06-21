@@ -256,9 +256,11 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     private void clickVisibleOptionWithText(String text){
-        WebElement option = driver.findElement(
-                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
-                        + text + "')]"));
+        String optionXpath = "//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
+                + text + "')]";
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(optionXpath)));
+        WebElement option = driver.findElement(By.xpath(optionXpath));
         click(option);
     }
 
