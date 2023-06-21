@@ -144,7 +144,7 @@ public class PricingCalculatorPage extends AbstractPage {
         logger.debug("Trying to choose number of GPU '" + numberOfGpu + "'.");
         click(numberOfGpuSelect);
         WebElement numberOfGpuOption = driver.findElement(
-                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//md-option[contains(div,'"
+                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
                         + numberOfGpu + "')]"));
         click(numberOfGpuOption);
         return this;
