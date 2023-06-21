@@ -14,7 +14,7 @@ public class GoogleCloudSearchResultPage extends AbstractPage {
     private static final Logger logger = LogManager.getLogger();
     @FindBy(xpath = "//input[@aria-label='Search']")
     private WebElement searchInput;
-    @FindBy(xpath = "//div[@class='gsc-results gsc-webResult']//a[.='Google Cloud Platform Pricing Calculator']")
+    @FindBy(xpath = "//div[@class='gsc-results gsc-webResult']//a[.='Google Cloud Pricing Calculator']")
     private WebElement pricingCalculatorLink;
     public GoogleCloudSearchResultPage(WebDriver driver) {
         super(driver);

@@ -18,7 +18,7 @@ public class GoogleCloudPricingCalculatorEstimationTest extends AbstractGoogleCl
         String expectedLocalSsd = "2x375 GiB";
         String expectedCommitmentTerm = "1 Year";
         String expectedTotalEstimatedCost = "USD 4,024.56 per 1 month";*/
-        ComputeEngine computeEngine = ComputeEngineCreator.withCredentialsFromProperty();//fixme second part
+        ComputeEngine computeEngine = ComputeEngineCreator.withCredentialsFromProperty();
 
         String expectedProvisioningModel = computeEngine.getProvisioningModel();
         String expectedInstanceType = computeEngine.getMachineType();

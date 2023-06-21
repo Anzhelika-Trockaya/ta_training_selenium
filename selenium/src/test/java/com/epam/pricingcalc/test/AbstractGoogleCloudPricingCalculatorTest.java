@@ -27,7 +27,7 @@ public abstract class AbstractGoogleCloudPricingCalculatorTest {
     }
 
     protected PricingCalculatorEstimatePage openPageAndFillDataForEstimating(ComputeEngine computeEngine) {//fixme start here!!!
-        String searchText = "Google Cloud Platform Pricing Calculator";//todo refactor отдельно открытие
+        String searchText = "Google Cloud Pricing Calculator";//todo refactor отдельно открытие
         PricingCalculatorPage pricingCalculatorPage = new GoogleCloudStartPage(driver)
                 .openPage()
                 .clickSearchButton()

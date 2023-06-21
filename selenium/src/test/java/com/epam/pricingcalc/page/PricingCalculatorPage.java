@@ -25,47 +25,28 @@ public class PricingCalculatorPage extends AbstractPage {
     private WebElement numberOfInstancesInput;
     @FindBy(id = "select_value_label_88")
     private WebElement operatingSystemSelect;
-    @FindBy(id = "select_option_98")
-    private WebElement freeOperatingSystemOption;
     @FindBy(id = "select_value_label_89")
     private WebElement provisioningModelSelect;
-    @FindBy(id = "select_option_111")
-    private WebElement regularProvisioningModelOption;
     @FindBy(id = "select_value_label_91")
     private WebElement seriesSelect;
-    @FindBy(id = "select_option_212")
-    private WebElement seriesNOneOption;
     @FindBy(id = "select_value_label_92")
     private WebElement machineTypeSelect;
-    @FindBy(id = "select_option_451")
-    private WebElement machineTypeNOneStandardEightOption;
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//*[@aria-label='Add GPUs']")
     private WebElement addGpusCheckbox;
     @FindBy(xpath = "//*[@placeholder='GPU type']")
     private WebElement gpuTypeSelect;
-    @FindBy(xpath = "//div[contains(text(),'NVIDIA Tesla P100')]")
-    private WebElement gpuTypeNvidiaTeslaPHundredOption;
     @FindBy(xpath = "//*[@placeholder='Number of GPUs']")
     private WebElement numberOfGpuSelect;
-    @FindBy(xpath = "//*[@id='select_option_497']/div[contains(text(),'1')]")
-    private WebElement numberOfGpuOneOption;
-    @FindBy(id = "select_value_label_445")
+    @FindBy(xpath = "//*[@placeholder='Local SSD']")
     private WebElement localSsdSelect;
-    @FindBy(id = "select_option_472")
-    private WebElement localSsdTwoTimesThreeHundredSeventyFiveGbOption;
     @FindBy(id = "select_value_label_94")
     private WebElement datacenterLocationSelect;
-    @FindBy(id = "select_option_253")
-    private WebElement dataCenterLocationFrankfurtEuropeWestThreeOption;
     @FindBy(id = "select_value_label_95")
     private WebElement committedUsageSelect;
-    @FindBy(id = "select_option_134")
-    private WebElement committedUsageOneYearOption;
     @FindBy(xpath = "//form[@name='ComputeEngineForm']//button[contains(text(),'Add to Estimate')]")
     private WebElement addToEstimateButton;
-
     @FindBy(id = "input_97")
-    private WebElement whatAreInstancesForInput;//todo delete extra
+    private WebElement whatAreInstancesForInput;
     @FindBy(id = "select_value_label_222")
     private WebElement threadsPerCoreSelect;
     @FindBy(id = "select_value_label_90")
@@ -95,9 +76,6 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-
-    //todo start new code
-
     public PricingCalculatorPage chooseSectionComputeEngine() {
         logger.debug("Trying to choose section 'Compute engine'.");
         click(sectionComputeEngine);
@@ -105,43 +83,43 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage fillOutNumberOfInstances(String number) {
-        logger.debug("Trying to choose number of instances '"+ number + "'.");
-        sendKeysToInput(numberOfInstancesInput,number);
+        logger.debug("Trying to choose number of instances '" + number + "'.");
+        sendKeysToInput(numberOfInstancesInput, number);
         return this;
     }
 
     public PricingCalculatorPage selectOperatingSystem(String operatingSystem) {
-        logger.debug("Trying to choose operating system '"+ operatingSystem + "'.");
+        logger.debug("Trying to choose operating system '" + operatingSystem + "'.");
         click(operatingSystemSelect);
         WebElement operatingSystemOption = driver.findElement(
-                By.xpath("//*[@id='select_container_110']//div[contains(text(),'"+operatingSystem+"')]"));
+                By.xpath("//*[@id='select_container_110']//div[contains(text(),'" + operatingSystem + "')]"));
         click(operatingSystemOption);
         return this;
     }
 
     public PricingCalculatorPage selectProvisioningModel(String provisioningModel) {
-        logger.debug("Trying to choose provisioning model '"+ provisioningModel + "'.");
+        logger.debug("Trying to choose provisioning model '" + provisioningModel + "'.");
         click(provisioningModelSelect);
         WebElement provisioningModelOption = driver.findElement(
-                By.xpath("//*[@id='select_container_114']//div[contains(text(),'"+provisioningModel+"')]"));
+                By.xpath("//*[@id='select_container_114']//div[contains(text(),'" + provisioningModel + "')]"));
         click(provisioningModelOption);
         return this;
     }
 
     public PricingCalculatorPage selectMachineSeries(String machineSeries) {
-        logger.debug("Trying to choose machine series '"+ machineSeries + "'.");
+        logger.debug("Trying to choose machine series '" + machineSeries + "'.");
         click(seriesSelect);
         WebElement machineSeriesOption = driver.findElement(
-                By.xpath("//*[@id='select_container_122']//div[contains(text(),'"+machineSeries+"')]"));
+                By.xpath("//*[@id='select_container_122']//div[contains(text(),'" + machineSeries + "')]"));
         click(machineSeriesOption);
         return this;
     }
 
     public PricingCalculatorPage selectMachineType(String machineType) {
-        logger.debug("Trying to choose machine type '"+ machineType + "'.");
+        logger.debug("Trying to choose machine type '" + machineType + "'.");
         click(machineTypeSelect);
         WebElement machineTypeOption = driver.findElement(
-                By.xpath("//*[@id='select_container_124']//div[contains(text(),'"+machineType+"')]"));
+                By.xpath("//*[@id='select_container_124']//div[contains(text(),'" + machineType + "')]"));
         click(machineTypeOption);
         return this;
     }
@@ -153,46 +131,51 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage selectGpuType(String gpuType) {
-        logger.debug("Trying to choose GPU type '"+ gpuType + "'.");
+        logger.debug("Trying to choose GPU type '" + gpuType + "'.");
         click(gpuTypeSelect);
         WebElement gpuTypeOption = driver.findElement(
-                By.xpath("//*[@id='select_container_983']//div[contains(text(),'"+gpuType+"')]"));
+                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
+                        + gpuType + "')]"));
         click(gpuTypeOption);
         return this;
     }
 
     public PricingCalculatorPage selectNumberOfGpu(String numberOfGpu) {
-        logger.debug("Trying to choose number of GPU '"+ numberOfGpu + "'.");
+        logger.debug("Trying to choose number of GPU '" + numberOfGpu + "'.");
         click(numberOfGpuSelect);
         WebElement numberOfGpuOption = driver.findElement(
-                By.xpath("//*[@id='select_container_985']//div[contains(text(),'"+numberOfGpu+"')]"));
+                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
+                        + numberOfGpu + "')]"));
         click(numberOfGpuOption);
         return this;
     }
 
     public PricingCalculatorPage selectLocalSsd(String localSsd) {
-        logger.debug("Trying to choose local SSD '"+ localSsd + "'.");
+        logger.debug("Trying to choose local SSD '" + localSsd + "'.");
         click(localSsdSelect);
         WebElement localSsdOption = driver.findElement(
-                By.xpath("//*[@id='select_container_948']//div[contains(text(),'"+localSsd+"')]"));
+                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
+                        + localSsd + "')]"));
         click(localSsdOption);
         return this;
     }
 
     public PricingCalculatorPage selectDataCenterLocation(String dataCenterLocation) {
-        logger.debug("Trying to choose datacenter location '"+ dataCenterLocation + "'.");
+        logger.debug("Trying to choose datacenter location '" + dataCenterLocation + "'.");
         click(datacenterLocationSelect);
         WebElement dataCenterLocationOption = driver.findElement(
-                By.xpath("//*[@id='select_container_130']//div[contains(text(),'"+dataCenterLocation+"')]"));
+                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
+                        + dataCenterLocation + "')]"));
         click(dataCenterLocationOption);
         return this;
     }
 
     public PricingCalculatorPage selectCommittedUsage(String committedUsage) {
-        logger.debug("Trying to choose committed usage '"+ committedUsage + "'.");
+        logger.debug("Trying to choose committed usage '" + committedUsage + "'.");
         click(committedUsageSelect);
         WebElement committedUsageOption = driver.findElement(
-                By.xpath("//*[@id='select_container_137']//div[contains(text(),'"+committedUsage+"')]"));
+                By.xpath("//div[contains(@id,'select_container_') and @aria-hidden='false']//div[contains(text(),'"
+                        + committedUsage + "')]"));
         click(committedUsageOption);
         return this;
     }
@@ -204,41 +187,41 @@ public class PricingCalculatorPage extends AbstractPage {
     }
 
     public PricingCalculatorPage fillOutWhatAreInstancesFor(String whatAreInstancesFor) {
-        logger.debug("Trying to fill out 'What are the instances for' with text '"+ whatAreInstancesFor + "'.");
-        sendKeysToInput(whatAreInstancesForInput,whatAreInstancesFor);
+        logger.debug("Trying to fill out 'What are the instances for' with text '" + whatAreInstancesFor + "'.");
+        sendKeysToInput(whatAreInstancesForInput, whatAreInstancesFor);
         return this;
     }
 
     public PricingCalculatorPage selectMachineFamily(String machineFamily) {
-        logger.debug("Trying to choose machine family '"+ machineFamily + "'.");
+        logger.debug("Trying to choose machine family '" + machineFamily + "'.");
         click(machineFamilySelect);
         WebElement machineFamilyOption = driver.findElement(
-                By.xpath("//*[@id='select_container_120']//div[contains(text(),'"+machineFamily+"')]"));
+                By.xpath("//*[@id='select_container_120']//div[contains(text(),'" + machineFamily + "')]"));
         click(machineFamilyOption);
         return this;
     }
 
     public PricingCalculatorPage selectThreadsPerCore(String threadsPerCore) {
-        logger.debug("Trying to choose threads per core '"+ threadsPerCore + "'.");
+        logger.debug("Trying to choose threads per core '" + threadsPerCore + "'.");
         click(threadsPerCoreSelect);
         WebElement threadsPerCoreOption = driver.findElement(
-                By.xpath("//*[@id='select_container_224']//div[contains(text(),'"+threadsPerCore+"')]"));
+                By.xpath("//*[@id='select_container_224']//div[contains(text(),'" + threadsPerCore + "')]"));
         click(threadsPerCoreOption);
         return this;
     }
 
     public PricingCalculatorPage selectBootDiskType(String bootDiskType) {
-        logger.debug("Trying to choose boot disk type '"+ bootDiskType + "'.");
+        logger.debug("Trying to choose boot disk type '" + bootDiskType + "'.");
         click(bootDiskTypeSelect);
         WebElement bootDiskTypeOption = driver.findElement(
-                By.xpath("//*[@id='select_container_126']//div[contains(text(),'"+bootDiskType+"')]"));
+                By.xpath("//*[@id='select_container_126']//div[contains(text(),'" + bootDiskType + "')]"));
         click(bootDiskTypeOption);
         return this;
     }
 
     public PricingCalculatorPage fillOutBootDiskSize(String bootDiskSize) {
-        logger.debug("Trying to fill out boot disk size with value='"+ bootDiskSize + "'.");
-        sendKeysToInput(bootDiskSizeInput,bootDiskSize);
+        logger.debug("Trying to fill out boot disk size with value='" + bootDiskSize + "'.");
+        sendKeysToInput(bootDiskSizeInput, bootDiskSize);
         return this;
     }
 
@@ -251,7 +234,7 @@ public class PricingCalculatorPage extends AbstractPage {
     public boolean isCheckedEnableConfidentialVmService() {
         logger.debug("Trying to find out if is selected checkbox 'Enable Confidential VM service' checkbox.");
         boolean isChecked = isAttributeAriaCheckedEqualsTrue(enableConfidentialVmServiceCheckbox);
-        logger.info("Checkbox 'Enable Confidential VM service' is checked = "+isChecked);
+        logger.info("Checkbox 'Enable Confidential VM service' is checked = " + isChecked);
         return isChecked;
     }
 
@@ -264,184 +247,51 @@ public class PricingCalculatorPage extends AbstractPage {
     public boolean isCheckedAddSustainedUseDiscounts() {
         logger.debug("Trying to find out if is checked checkbox 'Add Sustained Use Discounts'.");
         boolean isChecked = isAttributeAriaCheckedEqualsTrue(addSustainedUseDiscountsCheckbox);
-        logger.info("Checkbox 'Add Sustained Use Discounts' is checked = "+isChecked);
+        logger.info("Checkbox 'Add Sustained Use Discounts' is checked = " + isChecked);
         return isChecked;
     }
 
     public boolean isCheckedAddGpus() {
         logger.debug("Trying to find out if is checked checkbox 'Add GPUs'.");
         boolean isChecked = isAttributeAriaCheckedEqualsTrue(addGpusCheckbox);
-        logger.info("Checkbox 'Add GPUs' is checked = "+isChecked);
+        logger.info("Checkbox 'Add GPUs' is checked = " + isChecked);
         return isChecked;
     }
 
     public PricingCalculatorPage fillOutInstancesUsingStaticPublicIp(String instancesUsingStaticPublicIp) {
-        logger.debug("Trying to fill out 'Instances using static public IP' with '"+ instancesUsingStaticPublicIp + "'.");
-        sendKeysToInput(instancesUsingStaticPublicIpInput,instancesUsingStaticPublicIp);
+        logger.debug("Trying to fill out 'Instances using static public IP' with '" + instancesUsingStaticPublicIp + "'.");
+        sendKeysToInput(instancesUsingStaticPublicIpInput, instancesUsingStaticPublicIp);
         return this;
     }
 
     public PricingCalculatorPage fillOutInstancesUsingEphemeralPublicIp(String instancesUsingEphemeralPublicIp) {
-        logger.debug("Trying to fill out 'Instances using ephemeral public IP' with '"+ instancesUsingEphemeralPublicIp + "'.");
+        logger.debug("Trying to fill out 'Instances using ephemeral public IP' with '" + instancesUsingEphemeralPublicIp + "'.");
         sendKeysToInput(instancesUsingEphemeralPublicIpInput, instancesUsingEphemeralPublicIp);
         return this;
     }
 
-    private void click(WebElement element){
+    private void click(WebElement element) {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(element));
         element.click();
     }
 
-    private boolean isAttributeAriaCheckedEqualsTrue(WebElement checkbox){
+    private boolean isAttributeAriaCheckedEqualsTrue(WebElement checkbox) {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(checkbox));
         return Boolean.parseBoolean(checkbox.getAttribute("aria-checked"));
     }
 
-    private void sendKeysToInput(WebElement input, String key){
+    private void sendKeysToInput(WebElement input, String key) {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(input));
         input.sendKeys(key);
     }
 
-    //todo end new code
     private void goIntoFrames() {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondFrame));
     }
-
-    /*//todo delete if success
-    public PricingCalculatorPage chooseSectionComputeEngine() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(sectionComputeEngine));
-        sectionComputeEngine.click();
-        logger.debug("Section 'Compute engine' was clicked.");
-        return this;
-    }
-
-    public PricingCalculatorPage fillOutNumberOfInstances(int number) {
-        if (number < 1) {
-            logger.error("Number of instances has to be bigger than zero.");
-            throw new RuntimeException("Number of instances has to be bigger than zero.");
-        }
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(numberOfInstancesInput));
-        numberOfInstancesInput.sendKeys(String.valueOf(number));
-        logger.debug("Number of instances was chosen. Number is " + number + ".");
-        return this;
-    }
-
-    public PricingCalculatorPage selectFreeOperatingSystem() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(operatingSystemSelect));
-        operatingSystemSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(freeOperatingSystemOption));
-        freeOperatingSystemOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectRegularProvisioningModel() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(provisioningModelSelect));
-        provisioningModelSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(regularProvisioningModelOption));
-        regularProvisioningModelOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectMachineSeriesNOne() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(seriesSelect));
-        seriesSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(seriesNOneOption));
-        seriesNOneOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectMachineTypeNOneStandardEight() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(machineTypeSelect));
-        machineTypeSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(machineTypeNOneStandardEightOption));
-        machineTypeNOneStandardEightOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage clickAddGpu() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(addGpuCheckBox));
-        addGpuCheckBox.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectGpuTypeNvidiaTeslaPHundred() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(gpuTypeSelect));
-        gpuTypeSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(gpuTypeNvidiaTeslaPHundredOption));
-        gpuTypeNvidiaTeslaPHundredOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectNumberOfGpuOne() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(numberOfGpuSelect));
-        numberOfGpuSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(numberOfGpuOneOption));
-        numberOfGpuOneOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectLocalSsdTwoTimesThreeHundredSeventyFiveGb() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(localSsdSelect));
-        localSsdSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(localSsdTwoTimesThreeHundredSeventyFiveGbOption));
-        localSsdTwoTimesThreeHundredSeventyFiveGbOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectDataCenterLocationFrankfurtEuropeWestThree() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(datacenterLocationSelect));
-        datacenterLocationSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(dataCenterLocationFrankfurtEuropeWestThreeOption));
-        dataCenterLocationFrankfurtEuropeWestThreeOption.click();
-        return this;
-    }
-
-    public PricingCalculatorPage selectCommittedUsageOneYear() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(committedUsageSelect));
-        committedUsageSelect.click();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(committedUsageOneYearOption));
-        committedUsageOneYearOption.click();
-        return this;
-    }
-
-    public PricingCalculatorEstimatePage clickAddToEstimate() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(addToEstimateButton));
-        addToEstimateButton.click();
-        return new PricingCalculatorEstimatePage(driver);
-    }
-
-    private void goIntoFrames() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondFrame));
-    }*/
 }
