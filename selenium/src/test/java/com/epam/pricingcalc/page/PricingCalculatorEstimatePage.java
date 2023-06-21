@@ -40,59 +40,51 @@ public class PricingCalculatorEstimatePage extends AbstractPage {
 
 
     public String receiveProvisioningModel() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(provisioningModelText));
-        String provisioningModel = takeOutValueFromProperty(provisioningModelText.getText());
+        String provisioningModel = receiveValueFromPropertyTextElement(provisioningModelText);
         logger.info("Received provisioning model :'" + provisioningModel + "'");
         return provisioningModel;
     }
 
     public String receiveInstanceType() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(instanceTypeText));
-        String instanceType = takeOutValueFromProperty(instanceTypeText.getText());
+        String instanceType = receiveValueFromPropertyTextElement(instanceTypeText);
         logger.info("Received instance type :'" + instanceType + "'");
         return instanceType;
     }
 
     public String receiveRegion() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(regionText));
-        String region = takeOutValueFromProperty(regionText.getText());
+        String region = receiveValueFromPropertyTextElement(regionText);
         logger.info("Received region : '" + region + "'");
         return region;
     }
 
     public String receiveLocalSsd() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(localSsdText));
-        String localSsd = takeOutValueFromProperty(localSsdText.getText());
+        String localSsd = receiveValueFromPropertyTextElement(localSsdText);
         logger.info("Received local SSD : '" + localSsd + "'");
         return localSsd;
     }
 
     public String receiveCommitmentTerm() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(commitmentTermText));
-        String commitmentTerm = takeOutValueFromProperty(commitmentTermText.getText());
+        String commitmentTerm = receiveValueFromPropertyTextElement(commitmentTermText);
         logger.info("Received commitment term : '" + commitmentTerm + "'");
         return commitmentTerm;
     }
 
     public String receiveTotalEstimatedCost() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(totalEstimatedCostText));
-        String totalEstimatedCost = takeOutValueFromProperty(totalEstimatedCostText.getText());
+        String totalEstimatedCost = receiveValueFromPropertyTextElement(totalEstimatedCostText);
         logger.info("Received total estimated cost :'" + totalEstimatedCost + "'");
         return totalEstimatedCost;
     }
 
     public PricingCalculatorEmailEstimatePage clickEmailEstimateButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(emailEstimateButton));
-        emailEstimateButton.click();
-        logger.debug("Button 'Email estimate' was clicked.");
+        logger.debug("Trying to click button 'Email estimate'.");
+        click(emailEstimateButton);
         return new PricingCalculatorEmailEstimatePage(driver);
+    }
+
+    private String receiveValueFromPropertyTextElement(WebElement propertyTextElement){
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(propertyTextElement));
+        return takeOutValueFromProperty(propertyTextElement.getText());
     }
 
     private String takeOutValueFromProperty(String text) {

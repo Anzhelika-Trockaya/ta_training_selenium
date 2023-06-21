@@ -32,21 +32,17 @@ public class PricingCalculatorEmailEstimatePage extends AbstractPage{
     }
 
     public PricingCalculatorEmailEstimatePage pasteEmail(String email) {
+        logger.debug("Trying to paste email address.");
         goIntoFrames();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(emailInput));
-        emailInput.sendKeys(email);
-        logger.debug("Email address was pasted.");
+        sendKeysToInput(emailInput, email);
         driver.switchTo().defaultContent();
         return this;
     }
 
     public PricingCalculatorEmailEstimatePage clickSendEmail() {
+        logger.debug("trying to click button 'Send email'.");
         goIntoFrames();
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(sendEmailButton));
-        sendEmailButton.click();
-        logger.debug("Button 'Send email' was clicked.");
+        click(sendEmailButton);
         driver.switchTo().defaultContent();
         return this;
     }

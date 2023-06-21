@@ -17,7 +17,7 @@ public class EmailGeneratorPage extends AbstractPage {
     @FindBy(xpath = "//a[@href='email-generator']")
     private WebElement generateLink;
     @FindBy(id = "geny")
-    private WebElement generatedEmailText;
+    private WebElement generatedEmailTextElement;
     @FindBy(xpath = "//span[contains(text(),'Check Inbox')]")
     private WebElement checkInboxButton;
     @FindBy(id = "refresh")
@@ -41,17 +41,14 @@ public class EmailGeneratorPage extends AbstractPage {
     }
 
     public EmailGeneratorPage generateEmail() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(generateLink));
-        generateLink.click();
-        logger.debug("Generate link was clicked.");
+        logger.debug("Trying to click generate link.");
+        click(generateLink);
         return this;
     }
 
     public String receiveGeneratedEmail() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(generatedEmailText));
-        String generatedEmail = generatedEmailText.getText();
+        logger.debug("Trying to receive generated email address.");
+        String generatedEmail = receiveTextFromWebElement(generatedEmailTextElement);
         logger.info("Generated email address: '" + generatedEmail + "'");
         return generatedEmail;
     }
@@ -60,7 +57,7 @@ public class EmailGeneratorPage extends AbstractPage {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(checkInboxButton));
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(checkInboxButton));//todo
+                .until(ExpectedConditions.elementToBeClickable(checkInboxButton));//todo !!!!!!
         checkInboxButton.click();
         logger.debug("Check inbox button was clicked.");
         return this;
@@ -70,11 +67,13 @@ public class EmailGeneratorPage extends AbstractPage {
         logger.debug("Waiting for email.");
         long startWaitingTime = System.currentTimeMillis();
         int currentWaitingTime;
-        while (receiveNumberOfMails().equals("0")) {
+        String numberOfEmails;
+        while ((numberOfEmails = receiveNumberOfMails()).equals("0")) {
+            logger.debug("Number of emails equals '" + numberOfEmails + "'.");
             currentWaitingTime = (int) (System.currentTimeMillis() - startWaitingTime);
             if (currentWaitingTime <= MAX_MAIL_WAITING_TIME_MILLIS) {
                 logger.debug("Refreshing page.");
-                refresh();
+                click(refreshButton);
             } else {
                 logger.error("Mail wasn't received.");
                 throw new RuntimeException("Mail wasn't received.");
@@ -87,9 +86,7 @@ public class EmailGeneratorPage extends AbstractPage {
         logger.debug("Trying to receive total estimated mostly cost.");
         try {
             driver.switchTo().frame(mailTextFrame);
-            new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                    .until(ExpectedConditions.visibilityOf(totalEstimatedMostlyCostText));
-            String totalEstimatedMostlyCost = totalEstimatedMostlyCostText.getText().trim();
+            String totalEstimatedMostlyCost = receiveTextFromWebElement(totalEstimatedMostlyCostText);
             logger.info("Total estimated mostly cost: '" + totalEstimatedMostlyCost + "'");
             return totalEstimatedMostlyCost;
         } finally {
@@ -98,17 +95,9 @@ public class EmailGeneratorPage extends AbstractPage {
     }
 
     private String receiveNumberOfMails() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(numberOfMailsText));
-        String numberOfMails = numberOfMailsText.getText().split(" ")[0];
+        String numberOfMails = receiveTextFromWebElement(numberOfMailsText).split(" ")[0];
         logger.info("Number of mails = '" + numberOfMails + "'");
         return numberOfMails;
-    }
-
-    private void refresh() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(refreshButton));
-        refreshButton.click();
     }
 
 }

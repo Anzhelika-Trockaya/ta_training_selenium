@@ -5,10 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class GoogleCloudSearchResultPage extends AbstractPage {
     private static final Logger logger = LogManager.getLogger();
@@ -27,10 +23,8 @@ public class GoogleCloudSearchResultPage extends AbstractPage {
     }
 
     public PricingCalculatorPage clickPricingCalculatorLink(){
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(pricingCalculatorLink));
-        pricingCalculatorLink.click();
-        logger.debug("Pricing calculator link was clicked.");
+        logger.debug("Trying click result, contains 'Google Cloud Pricing Calculator'.");
+        click(pricingCalculatorLink);
         return new PricingCalculatorPage(driver);
     }
 }

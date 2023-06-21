@@ -6,10 +6,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class GoogleCloudStartPage extends AbstractPage {
     private static final Logger logger = LogManager.getLogger();
@@ -26,26 +22,24 @@ public class GoogleCloudStartPage extends AbstractPage {
     public GoogleCloudStartPage openPage() {
         logger.debug("Google cloud start page is opening.");
         driver.get(GOOGLE_CLOUD_PAGE_URL);
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(searchButton));
         return this;
     }
 
     public GoogleCloudStartPage clickSearchButton(){
-        searchButton.click();
-        logger.debug("Search button was clicked.");
+        logger.debug("Trying to click search button.");
+        click(searchButton);
         return this;
     }
 
     public GoogleCloudStartPage pasteSearchText(String text){
-        searchInput.sendKeys(text);
-        logger.debug("Search text was pasted.");
+        logger.debug("Trying to paste search text.");
+        sendKeysToInput(searchInput, text);
         return this;
     }
 
     public GoogleCloudSearchResultPage clickEnter(){
-        searchInput.sendKeys(Keys.ENTER);
-        logger.debug("Key Enter was clicked.");
+        logger.debug("Trying to click Enter.");
+        sendKeysToInput(searchInput, Keys.ENTER);
         return new GoogleCloudSearchResultPage(driver);
     }
 }

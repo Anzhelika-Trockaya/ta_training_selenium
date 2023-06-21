@@ -2,6 +2,7 @@ package com.epam.pricingcalc.page;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -33,9 +34,21 @@ public abstract class AbstractPage {
         return Boolean.parseBoolean(checkbox.getAttribute("aria-checked"));
     }
 
-    protected void sendKeysToInput(WebElement input, String key) {
+    protected void sendKeysToInput(WebElement input, String keys) {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(input));
-        input.sendKeys(key);
+        input.sendKeys(keys);
+    }
+
+    protected void sendKeysToInput(WebElement input, Keys keys) {
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(input));
+        input.sendKeys(keys);
+    }
+
+    protected String receiveTextFromWebElement(WebElement element){
+        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
+                .until(ExpectedConditions.visibilityOf(element));
+        return element.getText().trim();
     }
 }
