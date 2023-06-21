@@ -270,24 +270,6 @@ public class PricingCalculatorPage extends AbstractPage {
         return this;
     }
 
-    private void click(WebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(element));
-        element.click();
-    }
-
-    private boolean isAttributeAriaCheckedEqualsTrue(WebElement checkbox) {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(checkbox));
-        return Boolean.parseBoolean(checkbox.getAttribute("aria-checked"));
-    }
-
-    private void sendKeysToInput(WebElement input, String key) {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(input));
-        input.sendKeys(key);
-    }
-
     private void goIntoFrames() {
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
