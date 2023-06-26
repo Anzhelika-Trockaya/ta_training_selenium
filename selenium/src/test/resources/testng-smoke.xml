@@ -3,7 +3,7 @@
 <suite name="Smoke" verbose="1">
     <test name="PricingCalculatingTest">
         <classes>
-            <class name="com.epam.pricingcalc.test.GoogleCloudPricingCalculatorTest">
+            <class name="com.epam.pricingcalc.test.GoogleCloudPricingCalculatorEstimationTest">
             </class>
         </classes>
     </test>

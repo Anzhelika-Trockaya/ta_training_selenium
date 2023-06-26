@@ -3,8 +3,6 @@ package com.epam.pricingcalc.driver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +18,13 @@ public class DriverSingleton {
             switch (System.getProperty("browser")) {
                 case "firefox": {
                     driver = WebDriverManager.firefoxdriver().create();
-                    driver.manage().window().maximize();
+                    break;
                 }
                 default: {
                     driver = WebDriverManager.chromedriver().create();
-                    driver.manage().window().maximize();
                 }
             }
+            driver.manage().window().maximize();
         }
         return driver;
     }
