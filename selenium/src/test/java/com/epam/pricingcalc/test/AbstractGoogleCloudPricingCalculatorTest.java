@@ -26,16 +26,8 @@ public abstract class AbstractGoogleCloudPricingCalculatorTest {
         driver = null;
     }
 
-    protected PricingCalculatorEstimatePage openPageAndFillDataForEstimating(ComputeEngine computeEngine) {//fixme start here!!!
-        String searchText = "Google Cloud Pricing Calculator";//todo refactor отдельно открытие
-        PricingCalculatorPage pricingCalculatorPage = new GoogleCloudStartPage(driver)
-                .openPage()
-                .clickSearchButton()
-                .pasteSearchText(searchText)
-                .clickEnter()
-                .clickPricingCalculatorLink();
-
-
+    protected PricingCalculatorEstimatePage openPageAndFillDataForEstimating(ComputeEngine computeEngine) {
+        PricingCalculatorPage pricingCalculatorPage = openPricingCalculatorPage();
         pricingCalculatorPage.chooseSectionComputeEngine();
         if (computeEngine.getNumberOfInstances() != null) {
             pricingCalculatorPage.fillOutNumberOfInstances(computeEngine.getNumberOfInstances());
@@ -98,5 +90,15 @@ public abstract class AbstractGoogleCloudPricingCalculatorTest {
             pricingCalculatorPage.selectCommittedUsage(computeEngine.getCommittedUsage());
         }
         return pricingCalculatorPage.clickAddToEstimate();
+    }
+
+    private PricingCalculatorPage openPricingCalculatorPage(){
+        String searchText = "Google Cloud Pricing Calculator";
+        return new GoogleCloudStartPage(driver)
+                .openPage()
+                .clickSearchButton()
+                .pasteSearchText(searchText)
+                .clickEnter()
+                .clickPricingCalculatorLink();
     }
 }
